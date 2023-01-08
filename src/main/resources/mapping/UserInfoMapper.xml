@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuan.order.post.dao.UserInfoMapper">
+    <!--  表信息  -->
+    <resultMap id="BaseResultMap" type="com.yuan.order.post.entity.UserInfo">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="type" jdbcType="SMALLINT" property="type"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="school_id" jdbcType="VARCHAR" property="schoolId"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id
+        , type, phone, school_id, alias
+    </sql>
+
+    <!--  查询  -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where phone = #{phone,jdbcType=VARCHAR}
+    </select>
+
+    <!--  删除  -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from user_info
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <!--  插入  -->
+    <insert id="insert" parameterType="com.yuan.order.post.entity.UserInfo">
+        insert into user_info (user_id, type, phone,
+                               school_id, alias)
+        values (#{userId,jdbcType=INTEGER}, #{type,jdbcType=SMALLINT}, #{phone,jdbcType=VARCHAR},
+                #{schoolId,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR})
+    </insert>
+
+    <!--  带判空的插入  -->
+    <insert id="insertSelective" parameterType="com.yuan.order.post.entity.UserInfo">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="schoolId != null">
+                school_id,
+            </if>
+            <if test="alias != null">
+                alias,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId,jdbcType=VARCHAR},
+            </if>
+            <if test="alias != null">
+                #{alias,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuan.order.post.entity.UserInfo">
+        update user_info
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolId != null">
+                school_id = #{schoolId,jdbcType=VARCHAR},
+            </if>
+            <if test="alias != null">
+                alias = #{alias,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yuan.order.post.entity.UserInfo">
+        update user_info
+        set type      = #{type,jdbcType=SMALLINT},
+            phone     = #{phone,jdbcType=VARCHAR},
+            school_id = #{schoolId,jdbcType=VARCHAR},
+            alias     = #{alias,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="myDatabase" targetRuntime="MyBatis3">
+        <!-- 数据库链接地址及连接用户密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/order?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false"
+                        userId="root"
+                        password="huoxingren">
+        </jdbcConnection>
+        <!-- 每个数据库表映射的 entity 类的位置 -->
+        <javaModelGenerator targetPackage="com.yuan.order.post.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 数据库映射文件 mapper 的存放位置 -->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- DAO类存放位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yuan.order.post.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- mysql对应表的映射类 -->
+        <!--        <table tableName="user_info" domainObjectName="UserInfo"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"/>-->
+
+        <!--        <table tableName="user_password" domainObjectName="UserPassword"-->
+        <!--               enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false"-->
+        <!--               enableDeleteByExample="false"-->
+        <!--               enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"/>-->
+
+
+    </context>
+</generatorConfiguration>
